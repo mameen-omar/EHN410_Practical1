@@ -1,0 +1,92 @@
+
+
+ \section*{E\+HN 410 -\/ Group 7}
+
+
+
+ \subsection*{Group members\+:}
+
+
+\begin{DoxyItemize}
+\item Mohamed Ameen Omar (u16055323)
+\item Llewellyn Moyse (u15100708)
+\item Douglas Healy (u16018100)
+\end{DoxyItemize}
+
+
+
+ \subsubsection*{To run the ssl-\/server\+:}
+
+
+
+
+\begin{DoxyEnumerate}
+\item Open the terminal.
+\item Navigate to the server root directory.
+\item Ensure that the certificate files are in the root directory of the server (or sub-\/directory of the server).
+\item Run the command make server.
+\item The server program will be compiled and the executable will be called \char`\"{}server\+Main\char`\"{}.
+\item Run the server using the default parameters using the command ./server\+Main
+\item Enter the P\+EM password (the default certificate and key password is\+: \textquotesingle{}password\textquotesingle{})
+\item The server will now be active and running.
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item To automatically compile and run the server with default parameters, run the command make run-\/server
+\begin{DoxyItemize}
+\item to view the server help menu run\+: ./server\+Main -\/h
+\item to specify a port use the -\/p flag followed by the port on which you would like the server to listen. (example ./server\+Main -\/p 3559).
+\end{DoxyItemize}
+\item If no hostname is specified with the port (-\/p hostname\+:port), the server by default listens on all available interfaces for an incoming connection.
+\item the user is able to change the certificate and key files for the server as well. Please view the server help menu for further details.
+\item The mime-\/types.\+tsv file in the server root directory is used to determine the mime-\/type to specify in the server response header. If this file is not in the root directory or the mime-\/type for a file is not in this file, the secure server will default to the \char`\"{}application/octet-\/stream\char`\"{} mime-\/type being specified and as such, will not notify the client what type of file is being sent.
+\item The secure server adheres to the H\+T\+TP 1.\+1 standard and only caters for G\+ET requests from a client. Additional functionality was not required.
+\end{DoxyItemize}
+
+
+
+ \subsubsection*{To run a client in the terminal\+:}
+
+
+
+
+\begin{DoxyEnumerate}
+\item Open the terminal.
+\item Navigate to the client root directory.
+\item Run the command make all.
+\item The client program will be compiled and the resulting executable will be called \char`\"{}client\char`\"{}.
+\item Run the client providing the -\/u command-\/line argument which should specify a path to a file on the server (eg. \mbox{[}host\mbox{]}\+:\mbox{[}port\mbox{]}/\mbox{[}filename\mbox{]}.\mbox{[}extension\mbox{]}).
+\item An optional -\/n command-\/line argument can be defined which will specify how many instances of the client should be spawned.
+\item The client will now run and the file that was specified will attempt to download.
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item A path to an existing file on an external web-\/server is defined within the makefile and can be run using the \textquotesingle{}make run\textquotesingle{} command.
+\item Issuing the command \char`\"{}./client -\/-\/help\char`\"{} or \char`\"{}./client -\/h\char`\"{} will print a help menu and provide insight on the accepted command line arguments.
+\end{DoxyItemize}
+
+\paragraph*{An absolute path to a file must be specified including the file name and extension.}
+
+
+
+ \subsubsection*{To access server files in a web browser\+:}
+
+
+
+
+\begin{DoxyEnumerate}
+\item Install all the server certificates in the web browser to be used (e.\+g Firefox).
+\item To do this, Go to the Certificate Manager in Firefox
+\begin{DoxyItemize}
+\item Click on Tools-\/$>$Options-\/$>$Advanced,
+\item Click on the Encryption Tab and click on View Certificates,
+\item Click on the Authorities tab and click Import, then
+\item Select your created certificate and provide the necessary permissions.
+\end{DoxyItemize}
+\item Ensure that the server is running.
+\item Navigate to the S\+SL server page in the browser\+: \href{https://hostname:port}{\tt https\+://hostname\+:port} (example\+: \href{https://localhost:40001/}{\tt https\+://localhost\+:40001/})
+\item The homepage will load.
+\item Click on the links provided.
+\item Navigate to unlisted files to download files that are not added by default (example\+: \href{https://localhost:40001/resources/sample.mp3}{\tt https\+://localhost\+:40001/resources/sample.\+mp3})
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item If the certificate files are not installed before accessing the server webpage, the page will appear as \char`\"{}untrusted\char`\"{}, add as an exception, and continue to the server homepage. 
+\end{DoxyItemize}

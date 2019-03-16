@@ -1,0 +1,287 @@
+\hypertarget{client_8h}{}\section{client/client.h File Reference}
+\label{client_8h}\index{client/client.\+h@{client/client.\+h}}
+
+
+Client program able to establish an S\+SL connection to a specified server.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$getopt.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/ssl.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/bio.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/err.\+h$>$}\newline
+Include dependency graph for client.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=154pt]{client_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct__thread__args}{\+\_\+thread\+\_\+args}
+\begin{DoxyCompactList}\small\item\em A structure used to encapsulate arguments sent to a new client thread handler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{client_8h_a45b6ee479d2daaf80ef51ad238c65c0d}\label{client_8h_a45b6ee479d2daaf80ef51ad238c65c0d}} 
+\#define \hyperlink{client_8h_a45b6ee479d2daaf80ef51ad238c65c0d}{W\+R\+I\+T\+E\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~4096
+\begin{DoxyCompactList}\small\item\em Buffer size used when writing to server. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{client_8h_a46167a977503a51eb6efe97e870568c3}\label{client_8h_a46167a977503a51eb6efe97e870568c3}} 
+\#define \hyperlink{client_8h_a46167a977503a51eb6efe97e870568c3}{R\+E\+A\+D\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~1024
+\begin{DoxyCompactList}\small\item\em Buffer size used when reading from server. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{client_8h_a8c8470adc3ccde16403efe9095394ed3}\label{client_8h_a8c8470adc3ccde16403efe9095394ed3}} 
+\#define {\bfseries H\+T\+T\+P\+\_\+\+D\+E\+L\+IM}~\char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{}
+\item 
+\mbox{\Hypertarget{client_8h_a2addad933336573674896d1a711e81ea}\label{client_8h_a2addad933336573674896d1a711e81ea}} 
+\#define {\bfseries H\+T\+T\+P\+\_\+\+S\+P\+A\+CE}~\char`\"{} \char`\"{}
+\item 
+\mbox{\Hypertarget{client_8h_a061d2cb1ab385faaf63cf0a4f954ae8d}\label{client_8h_a061d2cb1ab385faaf63cf0a4f954ae8d}} 
+\#define {\bfseries H\+T\+T\+P\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+T\+Y\+PE}~\char`\"{}Content-\/Type\+:\char`\"{}
+\item 
+\mbox{\Hypertarget{client_8h_aaf8ab78e79f73b4322567e511941284d}\label{client_8h_aaf8ab78e79f73b4322567e511941284d}} 
+\#define {\bfseries H\+T\+T\+P\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+G\+N\+TH}~\char`\"{}Content-\/Length\+:\char`\"{}
+\item 
+\mbox{\Hypertarget{client_8h_a01b63621cc4ee9561aecfaf991e8f4c2}\label{client_8h_a01b63621cc4ee9561aecfaf991e8f4c2}} 
+\#define \hyperlink{client_8h_a01b63621cc4ee9561aecfaf991e8f4c2}{H\+T\+T\+P\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+P\+A\+TH}~\char`\"{}downloads\char`\"{}
+\begin{DoxyCompactList}\small\item\em Download path where client will download the specified file to, this can be defined at compile time. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{client_8h_a4fbfb8d38c4df01aa223ca1b6d593001}\label{client_8h_a4fbfb8d38c4df01aa223ca1b6d593001}} 
+\#define {\bfseries C\+O\+L\+O\+U\+R\+\_\+\+R\+ED}~\char`\"{}\textbackslash{}x1B\mbox{[}31m\char`\"{}
+\item 
+\mbox{\Hypertarget{client_8h_aab830cc3243af7f74b77327aa26ab23f}\label{client_8h_aab830cc3243af7f74b77327aa26ab23f}} 
+\#define {\bfseries C\+O\+L\+O\+U\+R\+\_\+\+G\+RN}~\char`\"{}\textbackslash{}x1B\mbox{[}32m\char`\"{}
+\item 
+\mbox{\Hypertarget{client_8h_a3c6a639021ff35a0fb905612a4edc557}\label{client_8h_a3c6a639021ff35a0fb905612a4edc557}} 
+\#define {\bfseries C\+O\+L\+O\+U\+R\+\_\+\+Y\+EL}~\char`\"{}\textbackslash{}x1B\mbox{[}33m\char`\"{}
+\item 
+\mbox{\Hypertarget{client_8h_a58d9de6964db95bb879e64a755958377}\label{client_8h_a58d9de6964db95bb879e64a755958377}} 
+\#define {\bfseries C\+O\+L\+O\+U\+R\+\_\+\+B\+LU}~\char`\"{}\textbackslash{}x1B\mbox{[}34m\char`\"{}
+\item 
+\mbox{\Hypertarget{client_8h_aa8ff9cf949a91e20b865ed7d998dd4c5}\label{client_8h_aa8ff9cf949a91e20b865ed7d998dd4c5}} 
+\#define {\bfseries C\+O\+L\+O\+U\+R\+\_\+\+M\+AG}~\char`\"{}\textbackslash{}x1B\mbox{[}35m\char`\"{}
+\item 
+\mbox{\Hypertarget{client_8h_a487172a29c4c42e481856dd9882d83b1}\label{client_8h_a487172a29c4c42e481856dd9882d83b1}} 
+\#define {\bfseries C\+O\+L\+O\+U\+R\+\_\+\+C\+YN}~\char`\"{}\textbackslash{}x1B\mbox{[}36m\char`\"{}
+\item 
+\mbox{\Hypertarget{client_8h_a147267dcde16a76bdc81cde399e41d06}\label{client_8h_a147267dcde16a76bdc81cde399e41d06}} 
+\#define {\bfseries C\+O\+L\+O\+U\+R\+\_\+\+W\+HT}~\char`\"{}\textbackslash{}x1B\mbox{[}37m\char`\"{}
+\item 
+\mbox{\Hypertarget{client_8h_aba77d52b0fce6e966578f939d1e2a42d}\label{client_8h_aba77d52b0fce6e966578f939d1e2a42d}} 
+\#define {\bfseries C\+O\+L\+O\+U\+R\+\_\+\+R\+E\+S\+ET}~\char`\"{}\textbackslash{}x1B\mbox{[}0m\char`\"{}
+\item 
+\mbox{\Hypertarget{client_8h_aa8cecfc5c5c054d2875c03e77b7be15d}\label{client_8h_aa8cecfc5c5c054d2875c03e77b7be15d}} 
+\#define {\bfseries T\+R\+UE}~(1 == 1)
+\item 
+\mbox{\Hypertarget{client_8h_aa93f0eb578d23995850d61f7d61c55c1}\label{client_8h_aa93f0eb578d23995850d61f7d61c55c1}} 
+\#define {\bfseries F\+A\+L\+SE}~(1 == 0)
+\item 
+\mbox{\Hypertarget{client_8h_ad6497a312321c3e7e38848affdd00032}\label{client_8h_ad6497a312321c3e7e38848affdd00032}} 
+\#define {\bfseries trace}(f\+\_\+,  args...)
+\item 
+\mbox{\Hypertarget{client_8h_ac7bf88f07107bb69d3817c857a4117c4}\label{client_8h_ac7bf88f07107bb69d3817c857a4117c4}} 
+\#define {\bfseries \+\_\+printf}(f\+\_\+,  args...)~printf(f\+\_\+\char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{}, \#\#args)
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{client_8h_aba027bf73cecd0ccfad890748552be1c}\label{client_8h_aba027bf73cecd0ccfad890748552be1c}} 
+typedef struct \hyperlink{struct__thread__args}{\+\_\+thread\+\_\+args} \hyperlink{client_8h_aba027bf73cecd0ccfad890748552be1c}{thread\+\_\+args}
+\begin{DoxyCompactList}\small\item\em A structure used to encapsulate arguments sent to a new client thread handler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \hyperlink{client_8h_a3df7ecac9e73a53b8278020a216cff88}{C\+L\+I\+E\+N\+T\+\_\+\+Thread\+Handler} (void $\ast$thread\+Args)
+\begin{DoxyCompactList}\small\item\em Thread handler used for each client thread created. \end{DoxyCompactList}\item 
+B\+IO $\ast$ \hyperlink{client_8h_aa65d330efd2e64dbf42455681443ca34}{C\+L\+I\+E\+N\+T\+\_\+\+Attempt\+Connect} (S\+SL $\ast$ssl, S\+S\+L\+\_\+\+C\+TX $\ast$ctx, char $\ast$\hyperlink{client_8h_ab135e5154c1828bef226a3df98ee3333}{url})
+\begin{DoxyCompactList}\small\item\em Attempt secure connection to the server specified by the url parameter. \end{DoxyCompactList}\item 
+S\+S\+L\+\_\+\+C\+TX $\ast$ \hyperlink{client_8h_a3b5f000699c4f53e8615c1597b1c8f6e}{C\+L\+I\+E\+N\+T\+\_\+\+Init\+C\+TX} (void)
+\begin{DoxyCompactList}\small\item\em Attempt to create an S\+SL context. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{client_8h_a0306c39c0d5ad848227574db3a39dee3}{C\+L\+I\+E\+N\+T\+\_\+\+Write} (B\+IO $\ast$bio, char $\ast$buff)
+\begin{DoxyCompactList}\small\item\em Attempts to write to the server. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{client_8h_ae81077441665fb441e016d580b5a49b2}{C\+L\+I\+E\+N\+T\+\_\+\+Read} (B\+IO $\ast$bio, \hyperlink{client_8h_aba027bf73cecd0ccfad890748552be1c}{thread\+\_\+args} $\ast$thread\+Args)
+\begin{DoxyCompactList}\small\item\em Attempts to read from the server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{client_8h_ae813f75c9e72b199987413ff955e54d8}\label{client_8h_ae813f75c9e72b199987413ff955e54d8}} 
+B\+IO $\ast$ \hyperlink{client_8h_ae813f75c9e72b199987413ff955e54d8}{outbio} = N\+U\+LL
+\begin{DoxyCompactList}\small\item\em B\+IO instance used for printing errors. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{client_8h_ab135e5154c1828bef226a3df98ee3333}\label{client_8h_ab135e5154c1828bef226a3df98ee3333}} 
+char $\ast$ \hyperlink{client_8h_ab135e5154c1828bef226a3df98ee3333}{url} = N\+U\+LL
+\begin{DoxyCompactList}\small\item\em The url of the server in the format \mbox{[}host\mbox{]}\+:\mbox{[}port\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{client_8h_a44196e6a5696d10442c29e639437196e}\label{client_8h_a44196e6a5696d10442c29e639437196e}} 
+char $\ast$ \hyperlink{client_8h_a44196e6a5696d10442c29e639437196e}{path} = N\+U\+LL
+\begin{DoxyCompactList}\small\item\em The path to the file to be downloaded, must contain file extension. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{client_8h_ab79a8e6eceff978df17adfefd24c157a}\label{client_8h_ab79a8e6eceff978df17adfefd24c157a}} 
+char $\ast$ \hyperlink{client_8h_ab79a8e6eceff978df17adfefd24c157a}{file\+Ext}
+\begin{DoxyCompactList}\small\item\em The file name of the file to download which is obtained from the given path. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{client_8h_a1dffaa86d425273d26de380b7fcef769}\label{client_8h_a1dffaa86d425273d26de380b7fcef769}} 
+uint32\+\_\+t \hyperlink{client_8h_a1dffaa86d425273d26de380b7fcef769}{client\+Instances} = 1
+\begin{DoxyCompactList}\small\item\em Number of client instances which is defined by -\/n command-\/line argument, defaults to 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Client program able to establish an S\+SL connection to a specified server. 
+
+\begin{DoxyAuthor}{Authors}
+Douglas Healy (u16018100) 
+
+Llewellyn Moyse (u15100708) 
+
+Mohamed Ameen Omar (u16055323) 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2019/02/14 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+Copyright \copyright{} 2019 -\/ E\+H\+N410 Group 7 
+\end{DoxyCopyright}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{client_8h_aa65d330efd2e64dbf42455681443ca34}\label{client_8h_aa65d330efd2e64dbf42455681443ca34}} 
+\index{client.\+h@{client.\+h}!C\+L\+I\+E\+N\+T\+\_\+\+Attempt\+Connect@{C\+L\+I\+E\+N\+T\+\_\+\+Attempt\+Connect}}
+\index{C\+L\+I\+E\+N\+T\+\_\+\+Attempt\+Connect@{C\+L\+I\+E\+N\+T\+\_\+\+Attempt\+Connect}!client.\+h@{client.\+h}}
+\subsubsection{\texorpdfstring{C\+L\+I\+E\+N\+T\+\_\+\+Attempt\+Connect()}{CLIENT\_AttemptConnect()}}
+{\footnotesize\ttfamily B\+IO$\ast$ C\+L\+I\+E\+N\+T\+\_\+\+Attempt\+Connect (\begin{DoxyParamCaption}\item[{S\+SL $\ast$}]{ssl,  }\item[{S\+S\+L\+\_\+\+C\+TX $\ast$}]{ctx,  }\item[{char $\ast$}]{url }\end{DoxyParamCaption})}
+
+
+
+Attempt secure connection to the server specified by the url parameter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ssl} & The S\+SL instance created by the client \\
+\hline
+{\em ctx} & The S\+SL context created by the client \\
+\hline
+{\em url} & The server location in the format \mbox{[}host\mbox{]}\+:\mbox{[}port\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The B\+IO instance created if connection is successful 
+\end{DoxyReturn}
+
+
+Definition at line 134 of file client.\+c.
+
+\mbox{\Hypertarget{client_8h_a3b5f000699c4f53e8615c1597b1c8f6e}\label{client_8h_a3b5f000699c4f53e8615c1597b1c8f6e}} 
+\index{client.\+h@{client.\+h}!C\+L\+I\+E\+N\+T\+\_\+\+Init\+C\+TX@{C\+L\+I\+E\+N\+T\+\_\+\+Init\+C\+TX}}
+\index{C\+L\+I\+E\+N\+T\+\_\+\+Init\+C\+TX@{C\+L\+I\+E\+N\+T\+\_\+\+Init\+C\+TX}!client.\+h@{client.\+h}}
+\subsubsection{\texorpdfstring{C\+L\+I\+E\+N\+T\+\_\+\+Init\+C\+T\+X()}{CLIENT\_InitCTX()}}
+{\footnotesize\ttfamily S\+S\+L\+\_\+\+C\+TX$\ast$ C\+L\+I\+E\+N\+T\+\_\+\+Init\+C\+TX (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Attempt to create an S\+SL context. 
+
+\begin{DoxyReturn}{Returns}
+The S\+SL context if instantiation was successful 
+\end{DoxyReturn}
+
+
+Definition at line 185 of file client.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{client_8h_a3b5f000699c4f53e8615c1597b1c8f6e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{client_8h_ae81077441665fb441e016d580b5a49b2}\label{client_8h_ae81077441665fb441e016d580b5a49b2}} 
+\index{client.\+h@{client.\+h}!C\+L\+I\+E\+N\+T\+\_\+\+Read@{C\+L\+I\+E\+N\+T\+\_\+\+Read}}
+\index{C\+L\+I\+E\+N\+T\+\_\+\+Read@{C\+L\+I\+E\+N\+T\+\_\+\+Read}!client.\+h@{client.\+h}}
+\subsubsection{\texorpdfstring{C\+L\+I\+E\+N\+T\+\_\+\+Read()}{CLIENT\_Read()}}
+{\footnotesize\ttfamily uint8\+\_\+t C\+L\+I\+E\+N\+T\+\_\+\+Read (\begin{DoxyParamCaption}\item[{B\+IO $\ast$}]{bio,  }\item[{\hyperlink{client_8h_aba027bf73cecd0ccfad890748552be1c}{thread\+\_\+args} $\ast$}]{thread\+Args }\end{DoxyParamCaption})}
+
+
+
+Attempts to read from the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bio} & The B\+IO instance created when establishing a connection to the server \\
+\hline
+{\em thread\+Args} & Encapsulated thread arguments containing the thread index and ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\+R\+UE for a successful read / F\+A\+L\+SE for unsuccessful read 
+\end{DoxyReturn}
+
+
+Definition at line 207 of file client.\+c.
+
+\mbox{\Hypertarget{client_8h_a3df7ecac9e73a53b8278020a216cff88}\label{client_8h_a3df7ecac9e73a53b8278020a216cff88}} 
+\index{client.\+h@{client.\+h}!C\+L\+I\+E\+N\+T\+\_\+\+Thread\+Handler@{C\+L\+I\+E\+N\+T\+\_\+\+Thread\+Handler}}
+\index{C\+L\+I\+E\+N\+T\+\_\+\+Thread\+Handler@{C\+L\+I\+E\+N\+T\+\_\+\+Thread\+Handler}!client.\+h@{client.\+h}}
+\subsubsection{\texorpdfstring{C\+L\+I\+E\+N\+T\+\_\+\+Thread\+Handler()}{CLIENT\_ThreadHandler()}}
+{\footnotesize\ttfamily void$\ast$ C\+L\+I\+E\+N\+T\+\_\+\+Thread\+Handler (\begin{DoxyParamCaption}\item[{void $\ast$}]{thread\+Args }\end{DoxyParamCaption})}
+
+
+
+Thread handler used for each client thread created. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em thread\+Args} & the encapsulated thread arguments containing the thread index and ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 157 of file client.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{client_8h_a3df7ecac9e73a53b8278020a216cff88_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{client_8h_a0306c39c0d5ad848227574db3a39dee3}\label{client_8h_a0306c39c0d5ad848227574db3a39dee3}} 
+\index{client.\+h@{client.\+h}!C\+L\+I\+E\+N\+T\+\_\+\+Write@{C\+L\+I\+E\+N\+T\+\_\+\+Write}}
+\index{C\+L\+I\+E\+N\+T\+\_\+\+Write@{C\+L\+I\+E\+N\+T\+\_\+\+Write}!client.\+h@{client.\+h}}
+\subsubsection{\texorpdfstring{C\+L\+I\+E\+N\+T\+\_\+\+Write()}{CLIENT\_Write()}}
+{\footnotesize\ttfamily uint8\+\_\+t C\+L\+I\+E\+N\+T\+\_\+\+Write (\begin{DoxyParamCaption}\item[{B\+IO $\ast$}]{bio,  }\item[{char $\ast$}]{buff }\end{DoxyParamCaption})}
+
+
+
+Attempts to write to the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bio} & The B\+IO instance created when establishing a connection to the server \\
+\hline
+{\em buff} & Buffer to be written to the server \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\+R\+UE for a successful write / F\+A\+L\+SE for an unsuccessful write 
+\end{DoxyReturn}
+
+
+Definition at line 196 of file client.\+c.
+

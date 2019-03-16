@@ -1,0 +1,182 @@
+\hypertarget{client_8c}{}\section{client/client.c File Reference}
+\label{client_8c}\index{client/client.\+c@{client/client.\+c}}
+
+
+Client program able to establish an S\+SL connection to a specified server.  
+
+
+{\ttfamily \#include \char`\"{}client.\+h\char`\"{}}\newline
+Include dependency graph for client.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{client_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{client_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\item 
+B\+IO $\ast$ \hyperlink{client_8c_aa65d330efd2e64dbf42455681443ca34}{C\+L\+I\+E\+N\+T\+\_\+\+Attempt\+Connect} (S\+SL $\ast$ssl, S\+S\+L\+\_\+\+C\+TX $\ast$ctx, char $\ast$\hyperlink{client_8h_ab135e5154c1828bef226a3df98ee3333}{url})
+\begin{DoxyCompactList}\small\item\em Attempt secure connection to the server specified by the url parameter. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{client_8c_a31fd8b95d88abb6d809a7320e4bd50fe}{C\+L\+I\+E\+N\+T\+\_\+\+Thread\+Handler} (void $\ast$args)
+\begin{DoxyCompactList}\small\item\em Thread handler used for each client thread created. \end{DoxyCompactList}\item 
+S\+S\+L\+\_\+\+C\+TX $\ast$ \hyperlink{client_8c_a3b5f000699c4f53e8615c1597b1c8f6e}{C\+L\+I\+E\+N\+T\+\_\+\+Init\+C\+TX} (void)
+\begin{DoxyCompactList}\small\item\em Attempt to create an S\+SL context. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{client_8c_a0306c39c0d5ad848227574db3a39dee3}{C\+L\+I\+E\+N\+T\+\_\+\+Write} (B\+IO $\ast$bio, char $\ast$buff)
+\begin{DoxyCompactList}\small\item\em Attempts to write to the server. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{client_8c_ae81077441665fb441e016d580b5a49b2}{C\+L\+I\+E\+N\+T\+\_\+\+Read} (B\+IO $\ast$bio, \hyperlink{client_8h_aba027bf73cecd0ccfad890748552be1c}{thread\+\_\+args} $\ast$thread\+Args)
+\begin{DoxyCompactList}\small\item\em Attempts to read from the server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Client program able to establish an S\+SL connection to a specified server. 
+
+\begin{DoxyAuthor}{Authors}
+Douglas Healy (u16018100) 
+
+Llewellyn Moyse (u15100708) 
+
+Mohamed Ameen Omar (u16055323) 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2019/02/14 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+Copyright \copyright{} 2019 -\/ E\+H\+N410 Group 7 
+\end{DoxyCopyright}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{client_8c_aa65d330efd2e64dbf42455681443ca34}\label{client_8c_aa65d330efd2e64dbf42455681443ca34}} 
+\index{client.\+c@{client.\+c}!C\+L\+I\+E\+N\+T\+\_\+\+Attempt\+Connect@{C\+L\+I\+E\+N\+T\+\_\+\+Attempt\+Connect}}
+\index{C\+L\+I\+E\+N\+T\+\_\+\+Attempt\+Connect@{C\+L\+I\+E\+N\+T\+\_\+\+Attempt\+Connect}!client.\+c@{client.\+c}}
+\subsubsection{\texorpdfstring{C\+L\+I\+E\+N\+T\+\_\+\+Attempt\+Connect()}{CLIENT\_AttemptConnect()}}
+{\footnotesize\ttfamily B\+IO$\ast$ C\+L\+I\+E\+N\+T\+\_\+\+Attempt\+Connect (\begin{DoxyParamCaption}\item[{S\+SL $\ast$}]{ssl,  }\item[{S\+S\+L\+\_\+\+C\+TX $\ast$}]{ctx,  }\item[{char $\ast$}]{url }\end{DoxyParamCaption})}
+
+
+
+Attempt secure connection to the server specified by the url parameter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ssl} & The S\+SL instance created by the client \\
+\hline
+{\em ctx} & The S\+SL context created by the client \\
+\hline
+{\em url} & The server location in the format \mbox{[}host\mbox{]}\+:\mbox{[}port\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The B\+IO instance created if connection is successful 
+\end{DoxyReturn}
+
+
+Definition at line 134 of file client.\+c.
+
+\mbox{\Hypertarget{client_8c_a3b5f000699c4f53e8615c1597b1c8f6e}\label{client_8c_a3b5f000699c4f53e8615c1597b1c8f6e}} 
+\index{client.\+c@{client.\+c}!C\+L\+I\+E\+N\+T\+\_\+\+Init\+C\+TX@{C\+L\+I\+E\+N\+T\+\_\+\+Init\+C\+TX}}
+\index{C\+L\+I\+E\+N\+T\+\_\+\+Init\+C\+TX@{C\+L\+I\+E\+N\+T\+\_\+\+Init\+C\+TX}!client.\+c@{client.\+c}}
+\subsubsection{\texorpdfstring{C\+L\+I\+E\+N\+T\+\_\+\+Init\+C\+T\+X()}{CLIENT\_InitCTX()}}
+{\footnotesize\ttfamily S\+S\+L\+\_\+\+C\+TX$\ast$ C\+L\+I\+E\+N\+T\+\_\+\+Init\+C\+TX (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Attempt to create an S\+SL context. 
+
+\begin{DoxyReturn}{Returns}
+The S\+SL context if instantiation was successful 
+\end{DoxyReturn}
+
+
+Definition at line 185 of file client.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{client_8c_a3b5f000699c4f53e8615c1597b1c8f6e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{client_8c_ae81077441665fb441e016d580b5a49b2}\label{client_8c_ae81077441665fb441e016d580b5a49b2}} 
+\index{client.\+c@{client.\+c}!C\+L\+I\+E\+N\+T\+\_\+\+Read@{C\+L\+I\+E\+N\+T\+\_\+\+Read}}
+\index{C\+L\+I\+E\+N\+T\+\_\+\+Read@{C\+L\+I\+E\+N\+T\+\_\+\+Read}!client.\+c@{client.\+c}}
+\subsubsection{\texorpdfstring{C\+L\+I\+E\+N\+T\+\_\+\+Read()}{CLIENT\_Read()}}
+{\footnotesize\ttfamily uint8\+\_\+t C\+L\+I\+E\+N\+T\+\_\+\+Read (\begin{DoxyParamCaption}\item[{B\+IO $\ast$}]{bio,  }\item[{\hyperlink{client_8h_aba027bf73cecd0ccfad890748552be1c}{thread\+\_\+args} $\ast$}]{thread\+Args }\end{DoxyParamCaption})}
+
+
+
+Attempts to read from the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bio} & The B\+IO instance created when establishing a connection to the server \\
+\hline
+{\em thread\+Args} & Encapsulated thread arguments containing the thread index and ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\+R\+UE for a successful read / F\+A\+L\+SE for unsuccessful read 
+\end{DoxyReturn}
+
+
+Definition at line 207 of file client.\+c.
+
+\mbox{\Hypertarget{client_8c_a31fd8b95d88abb6d809a7320e4bd50fe}\label{client_8c_a31fd8b95d88abb6d809a7320e4bd50fe}} 
+\index{client.\+c@{client.\+c}!C\+L\+I\+E\+N\+T\+\_\+\+Thread\+Handler@{C\+L\+I\+E\+N\+T\+\_\+\+Thread\+Handler}}
+\index{C\+L\+I\+E\+N\+T\+\_\+\+Thread\+Handler@{C\+L\+I\+E\+N\+T\+\_\+\+Thread\+Handler}!client.\+c@{client.\+c}}
+\subsubsection{\texorpdfstring{C\+L\+I\+E\+N\+T\+\_\+\+Thread\+Handler()}{CLIENT\_ThreadHandler()}}
+{\footnotesize\ttfamily void$\ast$ C\+L\+I\+E\+N\+T\+\_\+\+Thread\+Handler (\begin{DoxyParamCaption}\item[{void $\ast$}]{thread\+Args }\end{DoxyParamCaption})}
+
+
+
+Thread handler used for each client thread created. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em thread\+Args} & the encapsulated thread arguments containing the thread index and ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 157 of file client.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{client_8c_a31fd8b95d88abb6d809a7320e4bd50fe_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{client_8c_a0306c39c0d5ad848227574db3a39dee3}\label{client_8c_a0306c39c0d5ad848227574db3a39dee3}} 
+\index{client.\+c@{client.\+c}!C\+L\+I\+E\+N\+T\+\_\+\+Write@{C\+L\+I\+E\+N\+T\+\_\+\+Write}}
+\index{C\+L\+I\+E\+N\+T\+\_\+\+Write@{C\+L\+I\+E\+N\+T\+\_\+\+Write}!client.\+c@{client.\+c}}
+\subsubsection{\texorpdfstring{C\+L\+I\+E\+N\+T\+\_\+\+Write()}{CLIENT\_Write()}}
+{\footnotesize\ttfamily uint8\+\_\+t C\+L\+I\+E\+N\+T\+\_\+\+Write (\begin{DoxyParamCaption}\item[{B\+IO $\ast$}]{bio,  }\item[{char $\ast$}]{buff }\end{DoxyParamCaption})}
+
+
+
+Attempts to write to the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bio} & The B\+IO instance created when establishing a connection to the server \\
+\hline
+{\em buff} & Buffer to be written to the server \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\+R\+UE for a successful write / F\+A\+L\+SE for an unsuccessful write 
+\end{DoxyReturn}
+
+
+Definition at line 196 of file client.\+c.
+

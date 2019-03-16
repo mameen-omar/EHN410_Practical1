@@ -1,0 +1,436 @@
+\hypertarget{server_8h}{}\section{server/server.h File Reference}
+\label{server_8h}\index{server/server.\+h@{server/server.\+h}}
+
+
+Header This header provides the function protypes and constants used in the implementation of the B\+IO S\+SL threaded server. See files \hyperlink{server_main_8c}{server\+Main.\+c} and \hyperlink{server_8c}{server.\+c}.  
+
+
+{\ttfamily \#include \char`\"{}openssl/bio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}openssl/ssl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}openssl/err.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}malloc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}unistd.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}getopt.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+Include dependency graph for server.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{server_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{server_8h_ad78224efe1d3fb39b67ca74ad9d9eec7}\label{server_8h_ad78224efe1d3fb39b67ca74ad9d9eec7}} 
+\#define {\bfseries S\+T\+R\+I\+N\+G\+\_\+\+S\+I\+ZE}~80
+\item 
+\mbox{\Hypertarget{server_8h_a581612b7b0d68a0fe79f39038687b86c}\label{server_8h_a581612b7b0d68a0fe79f39038687b86c}} 
+\#define {\bfseries M\+I\+M\+E\+T\+Y\+PE}~\char`\"{}mime-\/types.\+tsv\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{server_8h_a2cdb41d0910c3a1d4b82668182dd8a33}{find\+Port} (int)
+\begin{DoxyCompactList}\small\item\em Function name\+: find\+Port Used as a helper function to find a open port for the server to bind to. This function uses the port 4000 as a base port and adds the contents of. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{server_8h_a7751c5c6e765ed5ce531c15904682eab}{get\+Mime\+Type} (char $\ast$name)
+\begin{DoxyCompactList}\small\item\em T\+Function name\+: get\+Mime\+Type This function is used to determine the mime-\/type of the file passed in as a paramter. It extracts the file extension of the filename passed in as. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{server_8h_a74ba0703eb52435c76e95d5976205593}{construct\+Header} (char $\ast$, unsigned long, char $\ast$)
+\begin{DoxyCompactList}\small\item\em Function name\+: construct\+Header This function constrcuts the response header sent to a client from the ssl server. Based off of the. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{server_8h_ada7020aa14056fa9a6c85f8181ca3d09}{parse\+Request} (char $\ast$)
+\begin{DoxyCompactList}\small\item\em Function name\+: parse\+Request This function processing the request received from the client. Since the ssl server only supports \char`\"{}\+G\+E\+T\char`\"{} http requests, it scans the request received given in. \end{DoxyCompactList}\item 
+void \hyperlink{server_8h_a9162818fd6dab1ab1d6ea625b9fd6b12}{send\+Response} (B\+IO $\ast$, char $\ast$)
+\begin{DoxyCompactList}\small\item\em Function name\+: send\+Response This function is used to send the requested file given by. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{server_8h_a0d20b69b0ad703df78459e1033d5c1d4}\label{server_8h_a0d20b69b0ad703df78459e1033d5c1d4}} 
+void \hyperlink{server_8h_a0d20b69b0ad703df78459e1033d5c1d4}{print\+Help} ()
+\begin{DoxyCompactList}\small\item\em Function name\+: print\+Help Prints out the help menu or usage menu for the ssl server. Called when the user inputs invalid parameters or the -\/h (help) flag is set by the user. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{server_8h_a12f20281e4906f4d25c7c059993ddbc1}{the\+Server} (void $\ast$)
+\begin{DoxyCompactList}\small\item\em Function name\+: the\+Server. Intended use is as a multithreaded function. Used to thread the server listening on a port. Should the server not be able to bind the specifed port, it will spawn a new thread to the \hyperlink{server_8h_a180f1d916084d821a9e99136064ab071}{smart\+Server()} function in order to find a reasonable open port and this function will end. Should the server have the ability to bind to the specified port, it will bind to it and run and inifinite loop listening for socket connections on that port. Once a client attempts to make a connection, the function will spawn a new thread for that client -\/ running the \hyperlink{server_8h_af7fd23153c3e547bf7dcde194ffce209}{a\+Client()} function allowing for multiple clients to be handled simultaneously, each within its own thread. \end{DoxyCompactList}\item 
+void \hyperlink{server_8h_a02ad7b3294dd3cdda69bb9295aaaf7ed}{send\+File} (B\+IO $\ast$socket, char $\ast$, char $\ast$)
+\begin{DoxyCompactList}\small\item\em Function name\+: send\+File This function sends or writes the appripate file to the B\+IO object/socket connected to the client. The function attempts to open the file with the path given by. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{server_8h_af7fd23153c3e547bf7dcde194ffce209}{a\+Client} (void $\ast$)
+\begin{DoxyCompactList}\small\item\em Function name\+: a\+Client This a function intended to be used in a multithreaded manner. This function handles a connection between the secure ssl server and the client. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{server_8h_a180f1d916084d821a9e99136064ab071}{smart\+Server} ()
+\begin{DoxyCompactList}\small\item\em Function name\+: smart\+Server. This function is a multithreaded function called when the requested port or default port for the S\+SL server could not be binded to, due to the port being blocked, restricted or already reserved. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{server_8h_acf5cd4c5a9ada37a9bd90a80be3e21dd}\label{server_8h_acf5cd4c5a9ada37a9bd90a80be3e21dd}} 
+char \hyperlink{server_8h_acf5cd4c5a9ada37a9bd90a80be3e21dd}{connected\+Port} \mbox{[}S\+T\+R\+I\+N\+G\+\_\+\+S\+I\+ZE\mbox{]}
+\begin{DoxyCompactList}\small\item\em used to output the current port on which the server is listening. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{server_8h_acb96fb4e0856037c018d840c905c1375}\label{server_8h_acb96fb4e0856037c018d840c905c1375}} 
+char \hyperlink{server_8h_acb96fb4e0856037c018d840c905c1375}{connected\+Host} \mbox{[}S\+T\+R\+I\+N\+G\+\_\+\+S\+I\+ZE\mbox{]}
+\begin{DoxyCompactList}\small\item\em used to output the current hostname on which the server is listening. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Header This header provides the function protypes and constants used in the implementation of the B\+IO S\+SL threaded server. See files \hyperlink{server_main_8c}{server\+Main.\+c} and \hyperlink{server_8c}{server.\+c}. 
+
+\begin{DoxyAuthor}{Authors}
+Mohamed Ameen Omar (u16055323) 
+
+Douglas Healy (u16018100) 
+
+Llewellyn Moyse (u15100708) 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Copyright \copyright{} 2019 -\/ E\+HN 410 Group 7 
+\end{DoxyCopyright}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{server_8h_af7fd23153c3e547bf7dcde194ffce209}\label{server_8h_af7fd23153c3e547bf7dcde194ffce209}} 
+\index{server.\+h@{server.\+h}!a\+Client@{a\+Client}}
+\index{a\+Client@{a\+Client}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{a\+Client()}{aClient()}}
+{\footnotesize\ttfamily void$\ast$ a\+Client (\begin{DoxyParamCaption}\item[{void $\ast$}]{socket }\end{DoxyParamCaption})}
+
+
+
+Function name\+: a\+Client This a function intended to be used in a multithreaded manner. This function handles a connection between the secure ssl server and the client. 
+
+This function is spawned when a client connects to the server. The function first performs the ssl handhake to ensure that the connection between the server and the client is secure. If the handshake fails for whatever reason, the connection is terminated and the function returns. Thereafter the client request is read into a buffer. If the client request could not be read or the connection has been disconnected, the function terminates the connection (if connected) and returns. Once the client request is successfully read, the request is processed and the response is sent or written to the requested client. Thereafter the connection to the client is terminated and the function returns.
+
+This function is called in a new thread each time a new client request is received, since each new request is a new connection. The server does not store any information about a client after the connection is terminated and each connection is treated as the first initial connection.
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & -\/ B\+I\+O$\ast$ pointing to a bio object that is connected to the client. The socket on which the current connection is done. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void$\ast$ -\/ Returns N\+U\+LL, since the intended use is as a P\+O\+S\+IX compliant threaded function 
+\end{DoxyReturn}
+
+
+Definition at line 121 of file server.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8h_af7fd23153c3e547bf7dcde194ffce209_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=328pt]{server_8h_af7fd23153c3e547bf7dcde194ffce209_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{server_8h_a74ba0703eb52435c76e95d5976205593}\label{server_8h_a74ba0703eb52435c76e95d5976205593}} 
+\index{server.\+h@{server.\+h}!construct\+Header@{construct\+Header}}
+\index{construct\+Header@{construct\+Header}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{construct\+Header()}{constructHeader()}}
+{\footnotesize\ttfamily char$\ast$ construct\+Header (\begin{DoxyParamCaption}\item[{char $\ast$}]{status\+Code,  }\item[{unsigned long}]{length,  }\item[{char $\ast$}]{mime\+Type }\end{DoxyParamCaption})}
+
+
+
+Function name\+: construct\+Header This function constrcuts the response header sent to a client from the ssl server. Based off of the. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em status\+Code} & it constructs the appropiate response, the length of the response as well as the mime\+Type of the response file sent back to the client. Constructs the header according to the H\+T\+TP version 1.\+1 standard.\\
+\hline
+\end{DoxyParams}
+returns the response header to be sent to the client.
+
+
+\begin{DoxyParams}{Parameters}
+{\em status\+Code} & -\/ char$\ast$ to a C-\/\+String object containing the response status code to be sent to the client. \\
+\hline
+{\em length} & -\/ unsigned long containing the length in bytes of the amount of data to be sent to client \\
+\hline
+{\em mime\+Type} & -\/ char$\ast$ to a C-\/\+String object contsaing the apprtiate mime-\/type of the data to be sent as a response to the client request. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char$\ast$ -\/ the constructed response header. 
+\end{DoxyReturn}
+
+
+Definition at line 283 of file server.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8h_a74ba0703eb52435c76e95d5976205593_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{server_8h_a2cdb41d0910c3a1d4b82668182dd8a33}\label{server_8h_a2cdb41d0910c3a1d4b82668182dd8a33}} 
+\index{server.\+h@{server.\+h}!find\+Port@{find\+Port}}
+\index{find\+Port@{find\+Port}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{find\+Port()}{findPort()}}
+{\footnotesize\ttfamily char$\ast$ find\+Port (\begin{DoxyParamCaption}\item[{int}]{counter }\end{DoxyParamCaption})}
+
+
+
+Function name\+: find\+Port Used as a helper function to find a open port for the server to bind to. This function uses the port 4000 as a base port and adds the contents of. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em counter} & to 4000. Returns the string representation of the proposed port. Note\+: Does not check whether the \char`\"{}counter\char`\"{} variable is beyond a certain threshold -\/ implementation specific. Does error checking to determine if the contents of \\
+\hline
+{\em counter} & is an integer. If it is not \char`\"{}-\/1\char`\"{} is returned to signify a problem.\\
+\hline
+{\em counter} & -\/ Type\+: Integer. Contents of which are added to 4000 to specify a proposed port. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char$\ast$ -\/ The string representation of the proposed port. 
+\end{DoxyReturn}
+
+
+Definition at line 49 of file server.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{server_8h_a2cdb41d0910c3a1d4b82668182dd8a33_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{server_8h_a7751c5c6e765ed5ce531c15904682eab}\label{server_8h_a7751c5c6e765ed5ce531c15904682eab}} 
+\index{server.\+h@{server.\+h}!get\+Mime\+Type@{get\+Mime\+Type}}
+\index{get\+Mime\+Type@{get\+Mime\+Type}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{get\+Mime\+Type()}{getMimeType()}}
+{\footnotesize\ttfamily char$\ast$ get\+Mime\+Type (\begin{DoxyParamCaption}\item[{char $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+T\+Function name\+: get\+Mime\+Type This function is used to determine the mime-\/type of the file passed in as a paramter. It extracts the file extension of the filename passed in as. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & and searches the mime-\/types.\+tsv file for the appropriate mime-\/type.\\
+\hline
+\end{DoxyParams}
+If the appropriate mime-\/type is found, it is returned as a char$\ast$, if not, the application/octet-\/stream mime-\/type is returned to indicate to the client that the mime-\/type for the file is unknown.
+
+If a user wishes to add a mime-\/type + file extension combination to improve compatiblity, they may do so by editing the mime-\/types.\+tsv file found in the root directory of the server. Ensure that the format is adhered to and the number found on the first line of the file is incremented to ensure that the newly added mime-\/type is considered.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & -\/ char$\ast$ pointing to a C-\/\+Style string containing the path to file to be sent to client. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char$\ast$ -\/ the mime-\/type to use for the file requested. 
+\end{DoxyReturn}
+
+
+Definition at line 455 of file server.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8h_a7751c5c6e765ed5ce531c15904682eab_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{server_8h_ada7020aa14056fa9a6c85f8181ca3d09}\label{server_8h_ada7020aa14056fa9a6c85f8181ca3d09}} 
+\index{server.\+h@{server.\+h}!parse\+Request@{parse\+Request}}
+\index{parse\+Request@{parse\+Request}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{parse\+Request()}{parseRequest()}}
+{\footnotesize\ttfamily char$\ast$ parse\+Request (\begin{DoxyParamCaption}\item[{char $\ast$}]{temp }\end{DoxyParamCaption})}
+
+
+
+Function name\+: parse\+Request This function processing the request received from the client. Since the ssl server only supports \char`\"{}\+G\+E\+T\char`\"{} http requests, it scans the request received given in. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em temp,for} & the directory of the file requested.\\
+\hline
+\end{DoxyParams}
+The requested file is then returned. If a requested file could not be found in the request header, due to H\+T\+TP protcol version mismatches or any other unknown reason, N\+U\+LL is returned.
+
+
+\begin{DoxyParams}{Parameters}
+{\em temp} & -\/ char$\ast$ poinuting to a C-\/\+String containing the request received from the client. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char$\ast$ -\/ the requested file from the request header. N\+U\+LL if a file path could not be found in the request header. 
+\end{DoxyReturn}
+
+
+Definition at line 185 of file server.\+c.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8h_ada7020aa14056fa9a6c85f8181ca3d09_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{server_8h_a02ad7b3294dd3cdda69bb9295aaaf7ed}\label{server_8h_a02ad7b3294dd3cdda69bb9295aaaf7ed}} 
+\index{server.\+h@{server.\+h}!send\+File@{send\+File}}
+\index{send\+File@{send\+File}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{send\+File()}{sendFile()}}
+{\footnotesize\ttfamily void send\+File (\begin{DoxyParamCaption}\item[{B\+IO $\ast$}]{socket,  }\item[{char $\ast$}]{file\+Name,  }\item[{char $\ast$}]{status\+Code }\end{DoxyParamCaption})}
+
+
+
+Function name\+: send\+File This function sends or writes the appripate file to the B\+IO object/socket connected to the client. The function attempts to open the file with the path given by. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & and writes the file in \char`\"{}chunks\char`\"{} of 2048 bytes. The contents of the opened file is read into a buffer and the contents of the buffer are written to the socket until the end of the file has been reached. The file is read at a rate of 2048 bytes per write. Once the entire contents of the file has been written the B\+IO object is flushed to ensure all data is sent and the function returns.\\
+\hline
+\end{DoxyParams}
+This function first constructs the appropriate response header, sends the response header, thereafter sending or writing the requested file.
+
+If the file could not be opened, due to it not existing in the root directory or sub-\/directory of the ssl server program, the function returns without writing anything to the client.
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & -\/ B\+I\+O$\ast$ to a B\+IO object connecting the client to the ssl server. \\
+\hline
+{\em file\+Name} & -\/ char$\ast$ pointing to a C-\/\+String containing the requested file \\
+\hline
+{\em status\+Code} & -\/ char$\ast$ pointing to a C-\/\+String containing the appropiate status code to send to the client within the response header. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 328 of file server.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{server_8h_a02ad7b3294dd3cdda69bb9295aaaf7ed_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8h_a02ad7b3294dd3cdda69bb9295aaaf7ed_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{server_8h_a9162818fd6dab1ab1d6ea625b9fd6b12}\label{server_8h_a9162818fd6dab1ab1d6ea625b9fd6b12}} 
+\index{server.\+h@{server.\+h}!send\+Response@{send\+Response}}
+\index{send\+Response@{send\+Response}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{send\+Response()}{sendResponse()}}
+{\footnotesize\ttfamily void send\+Response (\begin{DoxyParamCaption}\item[{B\+IO $\ast$}]{socket,  }\item[{char $\ast$}]{resource }\end{DoxyParamCaption})}
+
+
+
+Function name\+: send\+Response This function is used to send the requested file given by. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em resource} & to the client connected on \\
+\hline
+{\em socket.} & If the resoure is N\+U\+LL signalling that the request header was malformed, the page not found error html page is sent as a response to the client.\\
+\hline
+\end{DoxyParams}
+If the ressource requested points to a directory or the requested file is not found, the page not found error page is sent as a response to the client.
+
+If client sends a G\+ET / request to the server, the default index.\+html homepage is sent as a response.
+
+If the requested resource could be found the server root directrory or sub directroy, it is sent to the client. The main purpose of this function is to determine which response is sent to the clinet. It calls the send\+File function to send/write the appropriate file to the B\+IO socket.
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & -\/ B\+I\+O$\ast$ pointing to the B\+IO object on which the client is paired/connected. \\
+\hline
+{\em resource} & -\/ char$\ast$ pointing to a c-\/string object conting the path to the requested resoure received from the clinet. N\+U\+LL if the client sent a malformed request. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 228 of file server.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8h_a9162818fd6dab1ab1d6ea625b9fd6b12_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8h_a9162818fd6dab1ab1d6ea625b9fd6b12_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{server_8h_a180f1d916084d821a9e99136064ab071}\label{server_8h_a180f1d916084d821a9e99136064ab071}} 
+\index{server.\+h@{server.\+h}!smart\+Server@{smart\+Server}}
+\index{smart\+Server@{smart\+Server}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{smart\+Server()}{smartServer()}}
+{\footnotesize\ttfamily void$\ast$ smart\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function name\+: smart\+Server. This function is a multithreaded function called when the requested port or default port for the S\+SL server could not be binded to, due to the port being blocked, restricted or already reserved. 
+
+This function attempts to bind to an alternate port within the range 4000-\/4049. If no port within this range could be binded to the function ends the program, alerts; the user that no port could be found and requests the user re-\/run the ssl server with an alternate port speciifed.
+
+If a port could be binded to it functions in the same manner as the function the\+Server. See function\+: the\+Server.
+
+\begin{DoxyReturn}{Returns}
+void$\ast$ -\/ N\+U\+LL to signify the end of the thread. 
+\end{DoxyReturn}
+
+
+Definition at line 378 of file server.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8h_a180f1d916084d821a9e99136064ab071_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=245pt]{server_8h_a180f1d916084d821a9e99136064ab071_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{server_8h_a12f20281e4906f4d25c7c059993ddbc1}\label{server_8h_a12f20281e4906f4d25c7c059993ddbc1}} 
+\index{server.\+h@{server.\+h}!the\+Server@{the\+Server}}
+\index{the\+Server@{the\+Server}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{the\+Server()}{theServer()}}
+{\footnotesize\ttfamily void$\ast$ the\+Server (\begin{DoxyParamCaption}\item[{void $\ast$}]{bio\+Ptr }\end{DoxyParamCaption})}
+
+
+
+Function name\+: the\+Server. Intended use is as a multithreaded function. Used to thread the server listening on a port. Should the server not be able to bind the specifed port, it will spawn a new thread to the \hyperlink{server_8h_a180f1d916084d821a9e99136064ab071}{smart\+Server()} function in order to find a reasonable open port and this function will end. Should the server have the ability to bind to the specified port, it will bind to it and run and inifinite loop listening for socket connections on that port. Once a client attempts to make a connection, the function will spawn a new thread for that client -\/ running the \hyperlink{server_8h_af7fd23153c3e547bf7dcde194ffce209}{a\+Client()} function allowing for multiple clients to be handled simultaneously, each within its own thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bio\+Ptr} & -\/ B\+I\+O$\ast$ pointing to a B\+IO object with the ssl and tcp wrapping already implemented to enable a listening socket \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void$\ast$ -\/ Returns N\+U\+LL, since the intended use is as a P\+O\+S\+IX threaded function 
+\end{DoxyReturn}
+
+
+Definition at line 68 of file server.\+c.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8h_a12f20281e4906f4d25c7c059993ddbc1_cgraph}
+\end{center}
+\end{figure}
