@@ -1,5 +1,8 @@
 ************************************				
 # EHN 410 - Group 7
+************************************				
+# Practical 1:
+Implementation of a SSL client and server in C using the BIO library and Public-key Cryptography. 
 ************************************
 ## Group members:
 * Mohamed Ameen Omar 	(u16055323)
@@ -62,4 +65,8 @@ specified and as such, will not notify the client what type of file is being sen
 
 * If the certificate files are not installed before accessing the server webpage, the page will appear as "untrusted", add as an exception, 
 and continue to the server homepage.
+************************************				
+# References:
+* OpenSSL documentation: http://www.openssl.org/docs/ssl/
+* Generating certificates: http://gagravarr.org/writing/openssl-certs/index.shtml
 
